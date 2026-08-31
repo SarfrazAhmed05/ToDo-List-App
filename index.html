@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index2.js" defer></script>
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <title>To-Do App</title>
+    <style>
+        *{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+    max-width: 120rem;
+    margin: auto 3rem; 
+    /* height: 50vh; */
+    background-color: lightseagreen;
+    text-align: center;
+}
+li{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(162, 150, 150);
+    margin: 1rem 2rem;
+    padding: .5rem 0.5rem ;
+}
+li .content{
+    font-size: larger;
+    font-weight: 500;
+}
+section .btn{
+    padding: .5rem 1rem;
+    font-weight: 600;
+    border-radius: 3rem;
+}
+li .btn:hover{
+    text-decoration: underline;
+
+}
+form .todoin{
+    width: 70%;
+    padding: .5rem;
+    font-size: large;
+    font-weight: 600;
+}
+
+    </style>
+</head>
+<body>
+    <section class="container">
+        <form action="" class="form_todo" >
+            <h1>ADD YOUR PLAN IN TODO APP</h1>
+            <input type="text" name="todo" class="todoin" placeholder="Add Plan">
+            <input type="submit" class="'btn" value="Add To-Do" style="padding: .5rem; font-weight: 600; border-radius: 3rem;">
+        </form><br>
+    <ul>
+        <!-- <li class="list"><span class="content">Complete your task</span><br><br>
+            <div>
+                <button  class="btn done"> Done</button>
+                <button  class="btn remove">Remove</button>
+            </div>
+        </li> -->
+    </ul>
+
+    </section>
+    <script>
+            const formt=document.querySelector('.form_todo')
+            const valuetodo=document.querySelector('.todoin')
+            const list=document.querySelector('.content')
+            const ulappend=document.querySelector('ul')
+            formt.addEventListener('submit',(e)=>{
+                e.preventDefault()
+                const textvalue=valuetodo.value
+                const newelement=document.createElement('li')
+                const htmlpageelement=`
+                    <span class="content">${textvalue}</span>
+                        <div>
+                            <button  class="btn done"> Done</button>
+                            <button  class="btn remove">Remove</button>
+                        </div>`
+                newelement.innerHTML=htmlpageelement
+                ulappend.append(newelement)
+                valuetodo.value=''
+            })
+            ulappend.addEventListener('click',(e)=>{
+                if(e.target.classList.contains('done')){
+                    const donetask=e.target.parentNode.previousElementSibling
+                    donetask.style.textDecoration='line-through';
+                    donetask.style.color='red';
+                }
+                if(e.target.classList.contains('remove')){
+                    const removetask=e.target.parentNode.parentNode
+                    removetask.remove()
+                }
+            })    
+    </script>
+</body>
+</html>
